@@ -1,4 +1,4 @@
-member_casual,day_of_week,number_of_rides,average_duration,week_day
+member_casual,day_of_week,number_of_rides,average_duration_sec,week_day
 casual,1,332102,1997.8353909341106,Sun
 casual,2,233786,1664.7041182962196,Mon
 casual,3,251698,1494.9784980413033,Tue

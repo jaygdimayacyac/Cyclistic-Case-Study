@@ -1,4 +1,4 @@
-member_casual,number_of_rides,average_duration,month
+member_casual,number_of_rides,average_duration_sec,month
 casual,40005,1374.9935008123985,Jan
 member,150288,621.7265383796445,Jan
 casual,43014,1391.6156832659133,Feb
