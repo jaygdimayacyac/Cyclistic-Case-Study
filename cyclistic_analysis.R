@@ -112,7 +112,13 @@ summary_station <- yeardata %>%
             number_of_rides = n()) %>%    
   arrange(desc(number_of_rides)) %>% 
   filter(number_of_rides > 10, station != "") %>% # filter for number of rides greater than 10
-  
+
+summary_station_casual <- summary_station %>%
+  filter(member_casual == "casual")
+
+summary_station_member <- summary_station %>%
+  filter(member_casual == "member")
+
 # Visualize number of rides using heatmap in City of Chicago
 station_map <- leaflet(summary_station) %>%
   addTiles() %>%
@@ -131,6 +137,8 @@ write_csv(summary_wd, "summary_ride_length_weekday.csv")
 write_csv(summary_month, "summary_ride_length_month.csv")
 write_csv(summary_tod, "summary_ride_length_tod.csv")
 write_csv(summary_station, "summary_stations.csv")
+write_csv(summary_station_casual, "summary_stations_casual.csv")
+write_csv(summary_station_member, "summary_stations_member.csv")
 
 # View plots
 print(plot_wd)
