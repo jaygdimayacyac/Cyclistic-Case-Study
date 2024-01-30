@@ -326,20 +326,20 @@ If we take a look at the data based on days of the week, we see that the most ri
 
 | member_casual |number_of_rides | average_duration_sec | week_day |
 |--------------|--------------|-----------------|--------------|
-| casual        | 332102          | 1997.8353909341106   | Sun      |
-| casual        | 233786          | 1664.7041182962196   | Mon      |
-| casual        | 251698          | 1494.9784980413033   | Tue      |
-| casual        | 251547          | 1460.6805606904477   | Wed      |
-| casual        | 270811          | 1504.618102662004    | Thu      |
-| casual        | 310988          | 1654.6723346238443   | Fri      |
-| casual        | 401967          | 1942.8866100948585   | Sat      |
-| member        | 397940          | 835.1454113685481    | Sun      |
-| member        | 486724          | 711.2378699221736    | Mon      |
-| member        | 582163          | 720.0869498748631    | Tue      |
-| member        | 577674          | 715.3850614706565    | Wed      |
-| member        | 575679          | 720.3737204240557    | Thu      |
-| member        | 518038          | 751.0751720916227    | Fri      |
-| member        | 456076          | 833.2992768749067    | Sat      |
+| casual        | 332102          | 1997   | Sun      |
+| casual        | 233786          | 1664   | Mon      |
+| casual        | 251698          | 1494   | Tue      |
+| casual        | 251547          | 1460   | Wed      |
+| casual        | 270811          | 1504    | Thu      |
+| casual        | 310988          | 1654   | Fri      |
+| casual        | 401967          | 1942   | Sat      |
+| member        | 397940          | 835    | Sun      |
+| member        | 486724          | 711    | Mon      |
+| member        | 582163          | 720    | Tue      |
+| member        | 577674          | 715    | Wed      |
+| member        | 575679          | 720    | Thu      |
+| member        | 518038          | 751    | Fri      |
+| member        | 456076          | 833    | Sat      |
 
 It can be concluded that casual riders tend to ride more often on the weekends for longer periods of time, and members tend to ride more during the weekdays for shorter periods of time. If the assumption can be made that most people work between Monday to Friday, we can also assume that members possibly use bicycles for their daily commute. Let's look at the data based on time of day to see when in the day members tend to use Cyclistic bikes the most.
 
