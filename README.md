@@ -1,5 +1,7 @@
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+library(tidyverse)
+library(dplyr)
 ```
 # Cyclistic Case Study - Google Data Analytics
 ## Conducted by Gabriel Dimayacyac
@@ -198,7 +200,10 @@ summary_wd <- yeardata %>%
 
 view(summary_wd)
 ```
-
+```{r summary_wd_view, echo=FALSE, eval=TRUE}
+summary_wd <- read.csv("summary_ride_length_weekday.csv")
+view(summary_wd)
+```
 The summary table can be plotted as a visual:
 
 ```{r plot_wd}
