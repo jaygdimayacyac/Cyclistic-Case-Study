@@ -51,7 +51,7 @@ aggregate(yeardata$ride_duration ~ yeardata$member_casual, FUN = min)
 summary_wd <- yeardata %>% 
   group_by(member_casual, day_of_week) %>%  
   summarise(number_of_rides = n(),
-            average_duration = mean(ride_duration)) %>%    
+            average_duration_sec = mean(ride_duration)) %>%    
   arrange(member_casual, day_of_week) %>% 
   mutate(week_day=wday(day_of_week,label=TRUE))
 
@@ -59,17 +59,15 @@ summary_wd <- yeardata %>%
 plot_wd <- ggplot(summary_wd, aes(x = week_day, fill = member_casual)) +
   geom_col(aes(y = number_of_rides), position = position_dodge(width = 0.8), 
            color = "black") +
-  geom_col(aes(y = average_duration), position = position_dodge(width = 0.8), 
-           color = "black") +
-  labs(title = "Number of Rides and Average Duration by Rider Type and Day of the Week",
-       x = "Day of the Week", y = "Count") +
+  labs(title = "Number of Rides by Rider Type and Day of the Week (Oct 2022 - Nov 2023)",
+       x = "Day of the Week", y = "Number of Rides") +
   scale_fill_manual(values = c("#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3"))
 
 # Summarize the total and average number of monthly rides by rider type
 summary_month <- yeardata %>% 
   group_by(ride_month,member_casual) %>%  
   summarise(number_of_rides = n()
-            ,average_duration = mean(ride_duration)) %>%    
+            ,average_duration_sec = mean(ride_duration)) %>%    
   arrange(ride_month, member_casual) %>% 
   mutate(month = month(ride_month,label=TRUE)) %>% 
   subset(select=-ride_month)
@@ -78,10 +76,8 @@ summary_month <- yeardata %>%
 plot_month <- ggplot(summary_month, aes(x = month, fill = member_casual)) +
   geom_col(aes(y = number_of_rides), position = position_dodge(width = 0.5), 
            color = "black") +
-  geom_col(aes(y = average_duration), position = position_dodge(width = 0.5), 
-           color = "black") +
-  labs(title = "Number of Rides and Average Duration by Rider Type and Month",
-       x = "Month", y = "Count") +
+  labs(title = "Number of Rides by Rider Type and Month (Nov 2022 - Oct 2023)",
+       x = "Month", y = "Number of Rides") +
   scale_fill_manual(values = c("#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3"))
 
 
@@ -90,14 +86,24 @@ summary_tod <- yeardata %>%
   mutate(start_time = as.POSIXct(start_time, format = "%H"), hour = hour(start_time)) %>%
   group_by(hour) %>%
   summarise(number_of_rides = n(),
-            average_duration = mean(ride_duration)) %>% 
+            average_duration_sec = mean(ride_duration)) %>% 
   arrange(hour) %>% 
   mutate(hour = sprintf("%02d:00", hour))
 
-# Visualize the number of rides per time of the day
-plot_tod <- ggplot(summary_tod, aes(x = hour), axis.text.x=element_text(size=1)) +
-  geom_col(aes(y = number_of_rides), fill = "#66c2a5") +
-  labs(title = "Number of Rides by Hour of the Day",
+# Summarize number of rides per time of day for members
+summary_tod_member <- yeardata %>% 
+  filter(member_casual=="member") %>%
+  mutate(start_time = as.POSIXct(start_time, format = "%H"), hour = hour(start_time)) %>%
+  group_by(hour) %>%
+  summarise(number_of_rides = n(),
+            average_duration_sec = mean(ride_duration)) %>% 
+  arrange(hour) %>% 
+  mutate(hour = sprintf("%02d:00", hour))
+
+# Visualize the number of rides per time of the day for members
+plot_tod <- ggplot(summary_tod_member, aes(x = hour), axis.text.x=element_text(size=1)) +
+  geom_col(aes(y = number_of_rides), fill = "#fc8d62", color = "black") +
+  labs(title = "Number of Rides by Hour of the Day for Members (Nov 2022 - Oct 2023)",
        x = "Hour of the Day",
        y = "Number of Rides") + 
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
@@ -119,7 +125,7 @@ summary_station_casual <- summary_station %>%
 summary_station_member <- summary_station %>%
   filter(member_casual == "member")
 
-# Visualize number of rides using heatmap in City of Chicago
+# Visualize number of rides using heatmap in the City of Chicago
 station_map <- leaflet(summary_station) %>%
   addTiles() %>%
   addHeatmap(
@@ -135,7 +141,7 @@ station_map <- leaflet(summary_station) %>%
 write_csv(yeardata,"2022-2023-divvy-tripdata-clean.csv")
 write_csv(summary_wd, "summary_ride_length_weekday.csv")
 write_csv(summary_month, "summary_ride_length_month.csv")
-write_csv(summary_tod, "summary_ride_length_tod.csv")
+write_csv(summary_tod_member, "summary_ride_length_tod_member.csv")
 write_csv(summary_station, "summary_stations.csv")
 write_csv(summary_station_casual, "summary_stations_casual.csv")
 write_csv(summary_station_member, "summary_stations_member.csv")
