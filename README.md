@@ -1,10 +1,19 @@
+---
+title: "Cyclistic Case Study - Google Data Analytics"
+author: "Gabriel Dimayacyac"
+date: "2024-01-28"
+output:
+  html_document: default
+  pdf_document: default
+---
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 library(tidyverse)
 library(dplyr)
 ```
-# Cyclistic Case Study - Google Data Analytics
-## Conducted by Gabriel Dimayacyac
+
+## Google Data Analytics Career Certificate Capstone
 
 ### Background & Challenge
 
@@ -53,7 +62,7 @@ The data is in a structured format, where each file corresponds to a different m
 According to the standards used under Google's Data Analysis Career Certificate, data integrity is assessed using the acronym, ROCCC...
 
 | **ROCCC** | **Criterion** | **Cyclistic Assessment**                                                                                                                               |
-|---------|-----------------|--------------------------------------------|
+|---------------|---------------|-----------------------------------------|
 | R         | Reliable      | The data provided is unbiased and is accessible by the public.                                                                                         |
 | O         | Original      | The data provided is original and collected by the City of Chicago itself.                                                                             |
 | C         | Comprehensive | The schema of the data provided gives a clear picture of the trends that will help in understanding the differences between annual and casual members. |
@@ -62,7 +71,7 @@ According to the standards used under Google's Data Analysis Career Certificate,
 
 ### Data Processing
 
-Excel was utilized to process and ensure consistency throughout the data. As the data was divided into different data sets based on month, a simple procedure could be performed on each dataset to prepare the data for analysis.Before this procedure was performed, however, the original .csv datasets were duplicated just in case any errorsoccurred during data processing. After successful duplication of the data, the following procedure was performed for data processing:
+Excel was utilized to process and ensure consistency throughout the data. As the data was divided into different data sets based on month, a simple procedure could be performed on each dataset to prepare the data for analysis.Before this procedure was performed, however, the original .csv datasets were duplicated just in case any errors occurred during data processing. The original .csv files, before any data was manipulated, can be found [here](<https://drive.google.com/drive/folders/11672Bxyp6PUyaW7QC7ikX29n-IbzCihP?usp=sharing>). After successful duplication of the data, the following procedure was performed for data processing:
 
 **1. Change “started_at” and “ended_at” columns to proper DATETIME format**
 
@@ -112,7 +121,7 @@ To sum it up, after each data set was processed on Excel, each data set had the 
 -   end_time
 -   day_of_week
 
-From here, the data was ready to be further processed and analyzed on R.
+The data, after manipulation on Excel, can be found [here](<https://drive.google.com/drive/folders/1pbiFv0hNqH2aZv8wOO6uMfWCbY9tzcuk?usp=sharing>). From here, the data was ready to be further processed and analyzed on R.
 
 ### Further Data Processing and Analysis
 
@@ -200,10 +209,12 @@ summary_wd <- yeardata %>%
 
 view(summary_wd)
 ```
+
 ```{r summary_wd_view, echo=FALSE, eval=TRUE}
 summary_wd <- read.csv("summary_ride_length_weekday.csv")
 view(summary_wd)
 ```
+
 The summary table can be plotted as a visual:
 
 ```{r plot_wd}
@@ -307,4 +318,91 @@ print(station_map)
 
 ### Conclusions and Recommendations for Cyclistic
 
-*insert conclusions here*
+####Observations After analyzing the ride data from 2022-2023, we have a clearer picture on how to address the following questions:
+
+1.  How do annual members and casual riders use Cyclistic bikes differently?
+2.  Why would casual riders buy Cyclistic annual memberships?
+3.  How can Cyclistic use digital media to influence casual riders to become members?
+
+There are clear trends that we see in the data from the past year. Let's take a look at the figures to determine some trends in the data.
+
+![summary_plot_wd](/summary_plot_wd.png)
+
+If we take a look at the data based on days of the week, we see that the most rides for members occur between Monday to Friday. As for casual riders, we see the majority of rides occurring during the weekend. In addition to this, it is apparent from the following table that casual riders tend to use the bikes for longer durations of time than members:
+
+| member_casual |number_of_rides | average_duration_sec | week_day |
+|--------------|--------------|-----------------|--------------|
+| casual        | 332102          | 1997.8353909341106   | Sun      |
+| casual        | 233786          | 1664.7041182962196   | Mon      |
+| casual        | 251698          | 1494.9784980413033   | Tue      |
+| casual        | 251547          | 1460.6805606904477   | Wed      |
+| casual        | 270811          | 1504.618102662004    | Thu      |
+| casual        | 310988          | 1654.6723346238443   | Fri      |
+| casual        | 401967          | 1942.8866100948585   | Sat      |
+| member        | 397940          | 835.1454113685481    | Sun      |
+| member        | 486724          | 711.2378699221736    | Mon      |
+| member        | 582163          | 720.0869498748631    | Tue      |
+| member        | 577674          | 715.3850614706565    | Wed      |
+| member        | 575679          | 720.3737204240557    | Thu      |
+| member        | 518038          | 751.0751720916227    | Fri      |
+| member        | 456076          | 833.2992768749067    | Sat      |
+
+It can be concluded that casual riders tend to ride more often on the weekends for longer periods of time, and members tend to ride more during the weekdays for shorter periods of time. If the assumption can be made that most people work between Monday to Friday, we can also assume that members possibly use bicycles for their daily commute. Let's look at the data based on time of day to see when in the day members tend to use Cyclistic bikes the most.
+
+![summary_plot_tod](/summary_plot_tod.png)
+
+The figure shows that the most rides occur between 8 am to 8pm, with the first spike in rides occurring around 7-8 am and the number of rides peaking right around 5 pm. These times of the day generally coincide with work day rush hour times, so we can tentatively conclude that members are likely to be using Cyclistic bikes for their daily commute to work.
+
+![summary_plot_month](/summary_plot_month.png)
+
+A closer look at the performance of Cyclistic bikes throughout the year shows particularly strong demand between the months of May to October for 2022 to 2023. This is, of course, a metric that should be measured year after year to ensure certainty of the summer months being higher demand, but the results are consistent with our general knowledge of consumer preferences. Weather can greatly affect the demand of Cyclistic bikes. It may be worth exploring how to maintain demand of our service over the non-summer months.
+
+####Recommendations
+
+From analysis of the data, the following actions are recommended as next steps:
+
+*1. Create advertisements to promote bicycles for everyday commuting*
+
+If the goal of the Cyclistic marketing team is to determine how to convert casual riders to members, it can be concluded from the data that most members generally use the bikes to commute to and from work. If more casual riders are exposed to using the bikes in this manner, Cyclistic could have a higher conversion of casual riders to members over the following year.
+
+Research should be conducted into the pros and cons of commuting via bike as opposed to other modes of transportation. This can help with creating digital marketing material to encourage conversion of casual riders. Placing these advertisements at hotspots where casual riders generally start their rides could be strategic in improving the conversion rate. The most popular stations are shown below:
+
+| station                               | member_casual | latitude           | longitude          | number_of_rides |
+|--------------|--------------|--------------|-----------------|--------------|
+| Streeter Dr & Grand Ave               | casual        | 41.892277654572105 | -87.61206966705109 | 46156           |
+| DuSable Lake Shore Dr & Monroe St     | casual        | 41.88098505017817  | -87.61676695074928 | 30309           |
+| Michigan Ave & Oak St                 | casual        | 41.90096583310227  | -87.62376370810604 | 22519           |
+| DuSable Lake Shore Dr & North Blvd    | casual        | 41.911724571052346 | -87.62681749807803 | 20250           |
+| Millennium Park                       | casual        | 41.88107125714321  | -87.62409548210196 | 20243           |
+| Shedd Aquarium                        | casual        | 41.867232171100476 | -87.61541745355305 | 17765           |
+| Theater on the Lake                   | casual        | 41.92623791787845  | -87.63088415990748 | 16323           |
+| Dusable Harbor                        | casual        | 41.88697103347725  | -87.6128249672318  | 15147           |
+| Wells St & Concord Ln                 | casual        | 41.9120858054155   | -87.63473702493924 | 12178           |
+| Montrose Harbor                       | casual        | 41.963961775912374 | -87.638199876766   | 11914           |
+| Adler Planetarium                     | casual        | 41.8661052473746   | -87.60728781733829 | 11842           |
+| Indiana Ave & Roosevelt Rd            | casual        | 41.86791526142343  | -87.62304034435093 | 11655           |
+| Clark St & Armitage Ave               | casual        | 41.91829297154982  | -87.63631076643206 | 11040           |
+| Michigan Ave & 8th St                 | casual        | 41.872706968321644 | -87.62399283394353 | 10838           |
+| Clark St & Lincoln Ave                | casual        | 41.915706450250234 | -87.63460852240074 | 10830           |
+| Clark St & Elm St                     | casual        | 41.902887843574405 | -87.63142506824799 | 10799           |
+| Wilton Ave & Belmont Ave              | casual        | 41.94014579242387  | -87.65297120269435 | 10574           |
+| Wells St & Elm St                     | casual        | 41.90315905149631  | -87.63444607355272 | 9891            |
+| Wabash Ave & Grand Ave                | casual        | 41.89144540779151  | -87.6267583510629  | 9794            |
+| Clark St & Newport St                 | casual        | 41.944523918371644 | -87.65471552574903 | 9746            |
+| Broadway & Barry Ave                  | casual        | 41.93760927423465  | -87.64409862366365 | 9597            |
+| Michigan Ave & Washington St          | casual        | 41.8839704974753   | -87.62458039504295 | 9312            |
+| DuSable Lake Shore Dr & Diversey Pkwy | casual        | 41.93257593979363  | -87.63642667373095 | 9255            |
+| New St & Illinois St                  | casual        | 41.89080966975599  | -87.61854335927451 | 9180            |
+| DuSable Lake Shore Dr & Belmont Ave   | casual        | 41.940761721863545 | -87.63918731815411 | 9058            |
+| LaSalle St & Illinois St              | casual        | 41.89078214470238  | -87.63169389212038 | 9055            |
+| McClurg Ct & Ohio St                  | casual        | 41.892601752000004 | -87.61729865133937 | 8840            |
+
+For a visualization of the popular Cyclistic hotspots around Chicago, please see the heatmap below:
+
+[City of Chicago Heatmap](summary_plot_station_map.html)
+
+*2. Survey customers to gather satisfaction data and potential suggestions*
+
+It can be tentatively concluded from the data that members generally use Cyclistic to commute to work. Through conducting a survey, this tentative conclusion can be confirmed. In addition to this, a survey will help the marketing team understand how often people use the service and what suggestions they have to further improve the service. The surveys can generally confirm most of the tentative conclusions developed in this study.
+
+*3. Research methods of increasing demand during the non-summer months* As the summer months exhibited the most demand over the past year, it can be tentatively concluded that the demand over non-summer months is generally much lower. Research should be conducted into how to enhance the demand during non-summer months. Questions can even be asked during customer surveying to gain a perspective of why customers may choose not to use Cyclistic bikes during the non-summer months. This feedback can point the company towards pinpointing and directly tackling the biggest hurdles that inhibit demand.
