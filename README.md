@@ -1,19 +1,11 @@
----
-title: "Cyclistic Case Study - Google Data Analytics"
-author: "Gabriel Dimayacyac"
-date: "2024-01-28"
-output:
-  html_document: default
-  pdf_document: default
----
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 library(tidyverse)
 library(dplyr)
 ```
 
-## Google Data Analytics Career Certificate Capstone
+## Cyclistic Case Study - Google Data Analytics Capstone
+*by Gabriel Dimayacyac*
 
 ### Background & Challenge
 
@@ -318,7 +310,9 @@ print(station_map)
 
 ### Conclusions and Recommendations for Cyclistic
 
-####Observations After analyzing the ride data from 2022-2023, we have a clearer picture on how to address the following questions:
+*Observations* 
+
+After analyzing the ride data from 2022-2023, we have a clearer picture on how to address the following questions:
 
 1.  How do annual members and casual riders use Cyclistic bikes differently?
 2.  Why would casual riders buy Cyclistic annual memberships?
@@ -357,7 +351,7 @@ The figure shows that the most rides occur between 8 am to 8pm, with the first s
 
 A closer look at the performance of Cyclistic bikes throughout the year shows particularly strong demand between the months of May to October for 2022 to 2023. This is, of course, a metric that should be measured year after year to ensure certainty of the summer months being higher demand, but the results are consistent with our general knowledge of consumer preferences. Weather can greatly affect the demand of Cyclistic bikes. It may be worth exploring how to maintain demand of our service over the non-summer months.
 
-####Recommendations
+*Recommendations*
 
 From analysis of the data, the following actions are recommended as next steps:
 
@@ -399,7 +393,7 @@ Research should be conducted into the pros and cons of commuting via bike as opp
 
 For a visualization of the popular Cyclistic hotspots around Chicago, please see the heatmap below:
 
-[City of Chicago Heatmap](summary_plot_station_map.html)
+[City of Chicago Heatmap](https://jaygdimayacyac.github.io/Cyclistic-Case-Study/summary_plot_station_map.html)
 
 *2. Survey customers to gather satisfaction data and potential suggestions*
 
